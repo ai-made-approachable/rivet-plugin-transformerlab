@@ -1426,7 +1426,7 @@ function createTrainingDataPluginNode(rivet) {
         return {
           prompt: item[promptKey],
           generation: item[generationKey],
-          instructions: addInstructions && instructionKey !== void 0 ? item[instructionKey] : ""
+          instruction: addInstructions && instructionKey !== void 0 ? item[instructionKey] : ""
         };
       });
       let trainingDataObject;
