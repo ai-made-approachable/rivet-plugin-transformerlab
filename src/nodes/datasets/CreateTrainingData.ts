@@ -318,7 +318,7 @@ export function createTrainingDataPluginNode(rivet: typeof Rivet) {
         return {
           prompt: item[promptKey],
           generation: item[generationKey],
-          instructions: addInstructions && instructionKey !== undefined ? item[instructionKey] : "",
+          instruction: addInstructions && instructionKey !== undefined ? item[instructionKey] : "",
         };
       });
 
