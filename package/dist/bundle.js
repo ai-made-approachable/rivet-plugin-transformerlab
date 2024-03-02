@@ -715,7 +715,7 @@ var chatPluginNode = (rivet) => {
         data: {
           model: "",
           useModelInput: false,
-          temperature: 1024,
+          temperature: 0.5,
           useTemperatureInput: false,
           topK: -1,
           useTopKInput: false,
@@ -845,7 +845,7 @@ var chatPluginNode = (rivet) => {
           dataKey: "model",
           label: "Model",
           useInputToggleDataKey: "useModelInput",
-          helperMessage: "The LLM model to use in Ollama."
+          helperMessage: "The LLM model to use. Needs to be previously selected and run in Transformer Lab."
         },
         {
           type: "number",
@@ -944,9 +944,6 @@ var chatPluginNode = (rivet) => {
       };
     },
     async process(data, inputData, context) {
-      if (context.executor !== "nodejs") {
-        throw new Error("This node can only be run using a nodejs executor.");
-      }
       let outputs = {};
       const host = context.getPluginConfig("host") || "http://localhost:8000";
       if (!host.trim()) {
@@ -1237,7 +1234,7 @@ function createTrainingDataPluginNode(rivet) {
           type: "toggle",
           dataKey: "disjointEvaluation",
           useInputToggleDataKey: "useDisjointEvaluation",
-          label: "Use disjoint evaluation data? (If false, the evaluation data will be a random subset of the training data)"
+          label: "Use disjoint evaluation data? (If false, the evaluation data will be a subset of the training data)"
         },
         {
           type: "dropdown",
@@ -1526,6 +1523,7 @@ var plugin = (rivet) => {
       register(deleteDatasetNode);
       register(addDatasetNode);
       register(createTrainingDataNode);
+      register(ChatNode);
     }
   };
   return transformerLabsPlugin;

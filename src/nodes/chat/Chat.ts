@@ -43,17 +43,7 @@ import type {
   
   export type ChatNode = ChartNode<"chatPluginNode", ChatNodeData>;
   
-  type OllamaStreamingContentResponse = {
-    model: string;
-    created_at: string;
-    done: false;
-    message: {
-      role: string;
-      content: string;
-    };
-  };
-  
-  type OllamaStreamingFinalResponse = {
+  type TransformerLabStreamingFinalResponse = {
     model: string;
     created_at: string;
     message: {
@@ -69,9 +59,6 @@ import type {
     eval_duration: number;
   };
   
-  type OllamaStreamingGenerateResponse =
-    | OllamaStreamingContentResponse
-    | OllamaStreamingFinalResponse;
   
   export const chatPluginNode = (rivet: typeof Rivet) => {
     const impl: PluginNodeImpl<ChatNode> = {
@@ -81,7 +68,7 @@ import type {
           data: {
             model: "",
             useModelInput: false,
-            temperature: 1024,
+            temperature: 0.5,
             useTemperatureInput: false,
             topK: -1,
             useTopKInput: false,
@@ -227,7 +214,7 @@ import type {
             dataKey: "model",
             label: "Model",
             useInputToggleDataKey: "useModelInput",
-            helperMessage: "The LLM model to use in Ollama.",
+            helperMessage: "The LLM model to use. Needs to be previously selected and run in Transformer Lab.",
           },
           {
             type: "number",
@@ -336,9 +323,11 @@ import type {
       },
   
       async process(data, inputData, context) {
+        /*
         if (context.executor !== "nodejs") {
             throw new Error("This node can only be run using a nodejs executor.");
           }
+          */
 
         let outputs: Outputs = {};
   
@@ -479,7 +468,7 @@ import type {
         context: any
       ) {
         let finalMessageContent = '';
-        let finalResponse: OllamaStreamingFinalResponse | undefined;
+        let finalResponse: TransformerLabStreamingFinalResponse | undefined;
         let receivedData = false; // Flag to track if any data was received
     
         while (true) {

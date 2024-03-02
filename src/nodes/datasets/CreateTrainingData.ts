@@ -98,13 +98,13 @@ export function createTrainingDataPluginNode(rivet: typeof Rivet) {
           type: "toggle",
           dataKey: "shuffleData",
           useInputToggleDataKey: "useShuffleData",
-          label: "Shuffle the data before splitting it into training and evaluation data?",
+          label: "Shuffle the data before splitting it into training and evaluation data?", 
         },
         {
           type: "toggle",
           dataKey: "disjointEvaluation",
           useInputToggleDataKey: "useDisjointEvaluation",
-          label: "Use disjoint evaluation data? (If false, the evaluation data will be a random subset of the training data)",
+          label: "Use disjoint evaluation data? (If false, the evaluation data will be a subset of the training data)",
         },
         {
           type: "dropdown",

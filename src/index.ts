@@ -60,13 +60,14 @@ const plugin: RivetPluginInitializer = (rivet) => {
       register(deleteDatasetNode);
       register(addDatasetNode);
       register(createTrainingDataNode);
-
       /* Object nodes */
       //register(objectsToJSONLinesNode);
 
-      // Chat nodes
+      /* Model nodes */
       //register(getModelsNode);
-      //register(ChatNode);
+
+      /* Chat nodes */
+      register(ChatNode);
     },
   };
   return transformerLabsPlugin;
