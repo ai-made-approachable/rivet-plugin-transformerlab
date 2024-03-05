@@ -1045,14 +1045,12 @@ var chatPluginNode = (rivet) => {
     while (true) {
       const { value, done } = await reader.read();
       if (done) {
-        console.log("Stream reading done.");
         break;
       }
       receivedData = true;
       const chunk = new TextDecoder().decode(value);
       const lines = chunk.split("\n");
       for (const line of lines) {
-        console.log("Raw line:", line);
         if (line.startsWith("data: [DONE]")) {
           continue;
         }
