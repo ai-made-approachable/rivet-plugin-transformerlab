@@ -474,7 +474,7 @@ import type {
         while (true) {
             const { value, done } = await reader.read();
             if (done) {
-                console.log('Stream reading done.');
+                //console.log('Stream reading done.');
                 break;
             }
     
@@ -483,7 +483,7 @@ import type {
             const lines = chunk.split("\n");
     
             for (const line of lines) {
-                console.log('Raw line:', line);
+                //console.log('Raw line:', line);
     
                 if (line.startsWith('data: [DONE]')) {
                     // Handle the end of data signal
